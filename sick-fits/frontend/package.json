@@ -57,6 +57,10 @@
       ".*": "babel-jest"
     }
   },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
   "//": "This is our babel config, I prefer this over a .babelrc file",
   "babel": {
     "env": {

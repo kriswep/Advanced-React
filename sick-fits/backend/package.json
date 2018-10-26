@@ -28,6 +28,10 @@
   "repository": {
     "url": "wesbos.com"
   },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
   "babel": {
     "presets": [
       "env"
