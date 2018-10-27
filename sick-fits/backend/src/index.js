@@ -8,7 +8,7 @@ server.start(
   {
     cors: {
       credentials: true,
-      origin: process.env.FROINTEDN_URL,
+      origin: process.env.FRONTEND_URL,
     },
   },
   deets => console.log(`Server running on http://localhost:${deets.port}`),
