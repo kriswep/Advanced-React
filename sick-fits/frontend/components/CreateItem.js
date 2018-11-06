@@ -42,6 +42,26 @@ class CreateItem extends Component {
     this.setState({ [name]: val });
   };
 
+  uploadFile = async e => {
+    const { files } = e.target;
+    if (!files || files.length <= 0) return;
+
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('upload_preset', 'sickfits');
+
+    const res = await fetch(
+      'https://api.cloudinary.com/v1_1/wetainment/image/upload',
+      { method: 'POST', body: data },
+    );
+
+    const file = await res.json();
+    this.setState({
+      image: file.secure_url,
+      largeImage: file.eager[0].secure_url,
+    });
+  };
+
   render() {
     return (
       <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
@@ -95,6 +115,24 @@ class CreateItem extends Component {
                   value={this.state.description}
                   onChange={this.handleChange}
                 />
+              </label>
+              <label htmlFor="file">
+                Image
+                <input
+                  type="file"
+                  id="file"
+                  name="file"
+                  placeholder="Upload an image"
+                  required
+                  onChange={this.uploadFile}
+                />
+                {this.state.image && (
+                  <img
+                    src={this.state.image}
+                    alt="Upload Preview"
+                    width="250px"
+                  />
+                )}
               </label>
               <button type="submit">Submit</button>
             </fieldset>
